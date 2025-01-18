@@ -1,0 +1,128 @@
+{
+    "family": "${AWS_BACKEND_TD}",
+    "taskRoleArn": "arn:aws:iam::943635619664:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::943635619664:role/ecsTaskExecutionRole",
+    "memory": ${BACKEND_CONTAINER_MEMORY_SIZE},
+    "containerDefinitions": [
+      {
+        "name": "${AWS_BACKEND_CONTAINER_NAME}",
+        "image": "${URI}/${AWS_BACKEND_IMAGE_NAME}:${AWS_BACKEND_IMAGE_VERSION}",
+        "cpu": 0,
+        "memoryReservation": 300,
+        "portMappings": [
+          {
+            "containerPort": 5000,
+            "hostPort": 5000,
+            "protocol": "tcp"
+          }
+        ],
+        "essential": true,
+        "environment": [
+            {
+                "name": "POSTGRES_HOST",
+                "value": "${POSTGRES_HOST}"
+            },
+            {
+                "name": "AWS_SECRET_ACCESS_KEY",
+                "value": "${AWS_SECRET_ACCESS_KEY}"
+            },
+            {
+                "name": "ENVIRONMENT",
+                "value": "${ENVIRONMENT}"
+            },
+            {
+                "name": "SECRET_KEY",
+                "value": "${SECRET_KEY}"
+            },
+            {
+                "name": "AWS_ACCESS_KEY_ID",
+                "value": "${AWS_ACCESS_KEY_ID}"
+            },
+            {
+                "name": "APP_HOST",
+                "value": "${APP_HOST}"
+            },
+            {
+                "name": "WIDGET_SCRIPT_TAG_SRC",
+                "value": "${WIDGET_SCRIPT_TAG_SRC}"
+            },
+            {
+                "name": "SHOPIFY_API_KEY",
+                "value": "${SHOPIFY_API_KEY}"
+            },
+            {
+                "name": "CELERY_BROKER",
+                "value": "${CELERY_BROKER}"
+            },
+            {
+                "name": "CELERY_BACKEND",
+                "value": "${CELERY_BACKEND}"
+            },
+            {
+                "name": "POSTGRES_USER",
+                "value": "${POSTGRES_USER}"
+            },
+            {
+                "name": "AWS_REGION",
+                "value": "${AWS_REGION}"
+            },
+            {
+                "name": "SPLIDE_SCRIPT_TAG_SRC",
+                "value": "${SPLIDE_SCRIPT_TAG_SRC}"
+            },
+            {
+                "name": "POSTGRES_PASSWORD",
+                "value": "${POSTGRES_PASSWORD}"
+            },
+            {
+                "name": "POSTGRES_PORT",
+                "value": "${POSTGRES_PORT}"
+            },
+            {
+                "name": "POSTGRES_DB",
+                "value": "${POSTGRES_DB}"
+            },
+            {
+                "name": "S3_BUCKET_NAME",
+                "value": "${S3_BUCKET_NAME}"
+            },
+            {
+                "name": "DJANGO_SETTINGS_MODULE",
+                "value": "${DJANGO_SETTINGS_MODULE}"
+            },
+            {
+                "name": "CLIENT_APP_HOST",
+                "value": "${CLIENT_APP_HOST}"
+            },
+            {
+                "name": "SHOPIFY_API_SECRET_KEY",
+                "value": "${SHOPIFY_API_SECRET_KEY}"
+            }
+        ],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-create-group": "true",
+                "awslogs-group": "${AWS_BACKEND_LOG}",
+                "awslogs-region": "${AWS_REGION}",
+                "awslogs-stream-prefix": "ecs"
+            }
+        },
+        "healthCheck": {
+            "command": [
+                "CMD-SHELL",
+                "curl -f http://localhost:5000/api/health || exit 0"
+            ],
+            "interval": 30,
+            "timeout": 5,
+            "retries": 3
+        }
+      }
+    ],
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024"
+}
+  

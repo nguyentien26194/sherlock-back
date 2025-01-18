@@ -1,0 +1,12 @@
+_docker/
+__pycache__/
+
+.env
+.idea/
+.vscode
+
+static/
+.envs/
+builds/
+
+celerybeat-schedule

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+echo "Running collectstatic..."
+python sherlock/manage.py collectstatic --noinput
+
+echo "Runing migrate..."
+python sherlock/manage.py makemigrations
+echo "Runing migrate..."
+python sherlock/manage.py migrate
+
+echo "Running runserver..."
+PYTHONUNBUFFERED=1 python sherlock/manage.py runsslserver 0.0.0.0:8000 --certificate cert.pem --key key.pem

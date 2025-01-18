@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "sherlock-back"
+version = "0.1.0"
+description = "Sherlock Holmes"
+authors = ["rnt <rnt.paris.fr@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "4.1"
+django-environ = "^0.11.2"
+django-sslserver = "^0.22"
+psycopg2 = "^2.9.9"
+django-extensions = "^3.2.3"
+werkzeug = "^3.0.1"
+djangorestframework = "^3.14.0"
+ipython = "^8.18.1"
+djangorestframework-simplejwt = "^5.3.1"
+django-filter = "^23.5"
+pre-commit = "^3.5.0"
+isort = "^5.12.0"
+black = "^23.11.0"
+factory-boy = "^3.3.0"
+pyright = "^1.1.339"
+shopifyapi = "^12.3.0"
+django-cors-headers = "^4.3.1"
+celery = "^5.3.6"
+redis = "^5.0.1"
+gunicorn = "^21.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
