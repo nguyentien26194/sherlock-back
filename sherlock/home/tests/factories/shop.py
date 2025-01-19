@@ -1,16 +1,18 @@
-import factory
 from factory.django import DjangoModelFactory
-from factory.fuzzy import FuzzyChoice
+
+from faker import Faker
+
+fake = Faker("fr_FR")
 
 from home.models import Shop
 
 
 class ShopFactory(DjangoModelFactory):
-    name = factory.Faker("text", max_nb_chars=64)
-    email = factory.Faker("email")
-    shop_url = factory.Faker("url")
-    access_token = factory.Faker("pystr", max_chars=80)
-    test = factory.Faker("boolean")
+    name = fake.text(max_nb_chars=64)
+    email = fake.email()
+    shop_url = fake.url()
+    access_token = fake.pystr()
+    test = fake.boolean()
 
     class Meta:
         model = Shop
